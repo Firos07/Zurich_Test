@@ -1,0 +1,19 @@
+<header class="app-header">
+  <div class="app-header__inner">
+    <a routerLink="/claims" class="app-header__brand">Gestor de Siniestros</a>
+    <nav class="app-header__nav">
+      <a
+        routerLink="/claims"
+        routerLinkActive="app-header__link--active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="app-header__link"
+      >
+        Siniestros
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main class="app-main">
+  <router-outlet />
+</main>
