@@ -1,0 +1,87 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1 class="page-header__title">Detalle del siniestro</h1>
+    <div class="page-header__actions">
+      <a routerLink="/claims" class="btn btn--secondary">Volver</a>
+      @if (claim(); as c) {
+        <a [routerLink]="['/claims', c.id, 'edit']" class="btn btn--secondary">Editar</a>
+        <button type="button" class="btn btn--danger" (click)="pendingDelete.set(c)">Eliminar</button>
+        @if (nextStatus(c.status); as target) {
+          <button type="button" class="btn" (click)="onChangeStatus()" [disabled]="changing()">
+            Cambiar a {{ target }}
+          </button>
+        }
+      }
+    </div>
+  </div>
+
+  @if (message(); as msg) {
+    <div class="alert" [class.alert--success]="msg.type === 'success'" [class.alert--error]="msg.type === 'error'">
+      {{ msg.text }}
+    </div>
+  }
+
+  @if (loading()) {
+    <div class="state-message">
+      <div class="spinner"></div>
+      Cargando...
+    </div>
+  } @else if (error()) {
+    <div class="state-message">{{ error() }}</div>
+  } @else {
+    @if (claim(); as c) {
+    <div class="card">
+      <h2>Información del siniestro</h2>
+      <div class="detail-grid">
+        <div class="detail-item">
+          <div class="detail-item__label">Número de póliza</div>
+          <div class="detail-item__value">{{ c.policyNumber }}</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-item__label">Asegurado</div>
+          <div class="detail-item__value">{{ c.insuredName }}</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-item__label">Tipo</div>
+          <div class="detail-item__value">{{ c.claimType }}</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-item__label">Monto estimado</div>
+          <div class="detail-item__value">{{ c.estimatedAmount | currency: 'USD' : 'symbol-narrow' : '1.2-2' }}</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-item__label">Estado</div>
+          <div class="detail-item__value"><app-status-badge [status]="c.status" /></div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-item__label">Fecha de creación</div>
+          <div class="detail-item__value">{{ c.createdAt | date: 'dd/MM/yyyy HH:mm' }}</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-item__label">Última modificación</div>
+          <div class="detail-item__value">{{ c.updatedAt | date: 'dd/MM/yyyy HH:mm' }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Historial de estados</h2>
+      @if (history().length === 0) {
+        <div class="state-message">Sin historial registrado.</div>
+      } @else {
+        <app-claim-status-history [history]="history()" />
+      }
+    </div>
+    }
+  }
+
+  @if (pendingDelete(); as claim) {
+    <app-confirm-dialog
+      title="Eliminar siniestro"
+      [message]="'¿Confirma que desea eliminar el siniestro ' + claim.policyNumber + '?'"
+      confirmLabel="Eliminar"
+      (confirmed)="onDelete()"
+      (cancelled)="pendingDelete.set(null)"
+    />
+  }
+</div>

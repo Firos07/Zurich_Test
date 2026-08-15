@@ -1,0 +1,15 @@
+<ul class="timeline">
+  <li *ngFor="let h of history(); trackBy: trackById" class="timeline__item">
+    <span class="timeline__dot"></span>
+    <div class="timeline__body">
+      <div>
+        @if (h.previousStatus; as previous) {
+          <app-status-badge [status]="previous" />
+          <span class="timeline__arrow">→</span>
+        }
+        <app-status-badge [status]="h.newStatus" />
+      </div>
+      <div class="timeline__date">{{ h.changedAt | date: 'dd/MM/yyyy HH:mm' }}</div>
+    </div>
+  </li>
+</ul>
