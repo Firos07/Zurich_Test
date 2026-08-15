@@ -44,3 +44,7 @@ user-secrets.json
 Thumbs.db
 *.swp
 *.swo
+
+# ===== OpenCode =====
+.opencode/
+opencode.json
