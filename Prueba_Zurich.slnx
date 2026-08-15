@@ -1,0 +1,15 @@
+<Solution>
+  <Folder Name="/backend/src/">
+    <Project Path="src/Claims.Api/Claims.Api.csproj" />
+    <Project Path="src/Claims.Application/Claims.Application.csproj" />
+    <Project Path="src/Claims.Domain/Claims.Domain.csproj" />
+    <Project Path="src/Claims.Infrastructure/Claims.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/backend/tests/">
+    <Project Path="tests/Claims.Tests/Claims.Tests.csproj" />
+  </Folder>
+  <Folder Name="/database/">
+  </Folder>
+  <Folder Name="/frontend/">
+  </Folder>
+</Solution>

@@ -1,0 +1,42 @@
+# ===== .NET =====
+bin/
+obj/
+*.user
+*.suo
+.vs/
+*.userprefs
+*.rsuser
+TestResults/
+[Bb]uild/
+[Dd]ebug/
+[Rr]elease/
+*.nupkg
+*.snupkg
+project.lock.json
+artifacts/
+*.log
+*.dll
+*.exe
+*.pdb
+
+# ===== Node / Angular =====
+node_modules/
+dist/
+.tmp/
+.angular/
+frontend/claims-app/.angular/
+*.tsbuildinfo
+
+# ===== Environment / Secrets =====
+appsettings.*.local.json
+appsettings.Production.json
+*.local.json
+.env
+.env.*
+user-secrets.json
+
+# ===== OS / IDE =====
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
