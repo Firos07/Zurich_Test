@@ -1,0 +1,47 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1 class="page-header__title">Siniestros</h1>
+    <a routerLink="/claims/new" class="btn">+ Nuevo siniestro</a>
+  </div>
+
+  @if (message(); as msg) {
+    <div class="alert" [class.alert--success]="msg.type === 'success'" [class.alert--error]="msg.type === 'error'">
+      {{ msg.text }}
+    </div>
+  }
+
+  <div class="card">
+    <app-claim-filters (applied)="onFiltersApplied($event)" (cleared)="onFiltersCleared()" />
+  </div>
+
+  <div class="card">
+    @if (loading()) {
+      <div class="state-message">
+        <div class="spinner"></div>
+        Cargando siniestros...
+      </div>
+    } @else if (error()) {
+      <div class="state-message">{{ error() }}</div>
+    } @else if (claims().length === 0) {
+      <div class="state-message">No se encontraron siniestros.</div>
+    } @else {
+      <app-claim-table
+        [claims]="claims()"
+        (view)="onView($event)"
+        (edit)="onEdit($event)"
+        (remove)="onDeleteRequest($event)"
+        (changeStatus)="onChangeStatus($event)"
+      />
+    }
+  </div>
+
+  @if (pendingDelete(); as claim) {
+    <app-confirm-dialog
+      title="Eliminar siniestro"
+      [message]="'¿Confirma que desea eliminar el siniestro ' + claim.policyNumber + '?'"
+      confirmLabel="Eliminar"
+      (confirmed)="onDeleteConfirmed()"
+      (cancelled)="onDeleteCancelled()"
+    />
+  }
+</div>

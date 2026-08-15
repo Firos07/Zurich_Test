@@ -1,0 +1,35 @@
+<div class="table-wrapper">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Número de póliza</th>
+        <th>Asegurado</th>
+        <th>Tipo de siniestro</th>
+        <th>Monto estimado</th>
+        <th>Estado</th>
+        <th>Fecha de creación</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let claim of claims(); trackBy: trackById">
+        <td>{{ claim.policyNumber }}</td>
+        <td>{{ claim.insuredName }}</td>
+        <td>{{ claim.claimType }}</td>
+        <td>{{ claim.estimatedAmount | currency: 'USD' : 'symbol-narrow' : '1.2-2' }}</td>
+        <td><app-status-badge [status]="claim.status" /></td>
+        <td>{{ claim.createdAt | date: 'dd/MM/yyyy HH:mm' }}</td>
+        <td>
+          <div class="actions">
+            <button type="button" class="btn btn--secondary btn--sm" (click)="onView(claim)">Ver</button>
+            <button type="button" class="btn btn--secondary btn--sm" (click)="onEdit(claim)">Editar</button>
+            @if (nextStatus(claim.status); as target) {
+              <button type="button" class="btn btn--sm" (click)="onChangeStatus(claim)">{{ target }}</button>
+            }
+            <button type="button" class="btn btn--danger btn--sm" (click)="onDelete(claim)">Eliminar</button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

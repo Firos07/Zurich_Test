@@ -1,0 +1,7 @@
+:host {
+  display: block;
+}
+
+.card + .card {
+  margin-top: 16px;
+}

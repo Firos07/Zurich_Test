@@ -1,0 +1,33 @@
+<form class="filters" (ngSubmit)="onApply()">
+  <div class="filters__group">
+    <label for="filter-status">Estado</label>
+    <select
+      id="filter-status"
+      class="form-control"
+      [ngModel]="status() === null ? 'ALL' : status()"
+      (ngModelChange)="onStatusChange($event)"
+      name="status"
+    >
+      <option value="ALL">Todos</option>
+      <option *ngFor="let s of statuses" [value]="s">{{ s }}</option>
+    </select>
+  </div>
+
+  <div class="filters__group filters__group--grow">
+    <label for="filter-policy">Número de póliza</label>
+    <input
+      id="filter-policy"
+      class="form-control"
+      type="text"
+      placeholder="Ej. POL-1001"
+      [ngModel]="policyNumber()"
+      (ngModelChange)="policyNumber.set($event)"
+      name="policyNumber"
+    />
+  </div>
+
+  <div class="filters__actions">
+    <button type="submit" class="btn">Aplicar filtros</button>
+    <button type="button" class="btn btn--secondary" (click)="onClear()">Limpiar</button>
+  </div>
+</form>
