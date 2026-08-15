@@ -1,4 +1,5 @@
 <Solution>
+  <Folder Name="/backend/" />
   <Folder Name="/backend/src/">
     <Project Path="src/Claims.Api/Claims.Api.csproj" />
     <Project Path="src/Claims.Application/Claims.Application.csproj" />
@@ -9,6 +10,7 @@
     <Project Path="tests/Claims.Tests/Claims.Tests.csproj" />
   </Folder>
   <Folder Name="/database/">
+    <Project Path="database/ClaimsDatabase.sqlproj" Type="42ea0dbd-9cf1-443e-919e-be9c484e4577" />
   </Folder>
   <Folder Name="/frontend/">
   </Folder>
