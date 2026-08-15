@@ -1,6 +1,10 @@
 export type ClaimStatus = 'OPEN' | 'IN_REVIEW' | 'CLOSED';
 
-export const CLAIM_STATUSES: readonly ClaimStatus[] = ['OPEN', 'IN_REVIEW', 'CLOSED'];
+export const CLAIM_STATUSES: readonly { Value: ClaimStatus; Text: string }[] = [
+  { Value: 'OPEN', Text: 'Abierto' },
+  { Value: 'IN_REVIEW', Text: 'En revisión' },
+  { Value: 'CLOSED', Text: 'Cerrado' }
+];
 
 /** Estado siguiente permitido según la regla OPEN → IN_REVIEW → CLOSED. */
 export const NEXT_STATUS: Readonly<Record<ClaimStatus, ClaimStatus | null>> = {

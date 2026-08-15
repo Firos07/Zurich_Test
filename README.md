@@ -91,7 +91,8 @@ dotnet run --project src/Claims.Api --urls http://localhost:5000
 ```
 
 - Swagger disponible en `http://localhost:5000/swagger`.
-- La API habilita CORS únicamente para `http://localhost:4200`.
+- La API habilita CORS para cualquier origen `localhost`/`127.0.0.1` (cualquier puerto), de modo que `ng serve`
+  pueda conectarse sin importar el puerto que elijas.
 
 ## Configuración del Frontend
 

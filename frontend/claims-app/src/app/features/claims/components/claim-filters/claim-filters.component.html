@@ -9,7 +9,7 @@
       name="status"
     >
       <option value="ALL">Todos</option>
-      <option *ngFor="let s of statuses" [value]="s">{{ s }}</option>
+      <option *ngFor="let s of statuses" [value]="s.Value">{{ s.Text }}</option>
     </select>
   </div>
 
