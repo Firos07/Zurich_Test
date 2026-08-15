@@ -1,0 +1,67 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1 class="page-header__title">{{ isEdit ? 'Editar siniestro' : 'Nuevo siniestro' }}</h1>
+    <a routerLink="/claims" class="btn btn--secondary">Volver al listado</a>
+  </div>
+
+  @if (error(); as err) {
+    <div class="alert alert--error">{{ err }}</div>
+  }
+
+  <div class="card">
+    @if (loading()) {
+      <div class="state-message">
+        <div class="spinner"></div>
+        Cargando siniestro...
+      </div>
+    } @else {
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="policyNumber">Número de póliza</label>
+          <input id="policyNumber" class="form-control" type="text" formControlName="policyNumber" />
+          @if (form.controls.policyNumber.touched && form.controls.policyNumber.invalid) {
+            <div class="validation-error">El número de póliza es obligatorio.</div>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="insuredName">Asegurado</label>
+          <input id="insuredName" class="form-control" type="text" formControlName="insuredName" />
+          @if (form.controls.insuredName.touched && form.controls.insuredName.invalid) {
+            <div class="validation-error">El nombre del asegurado es obligatorio.</div>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="claimType">Tipo de siniestro</label>
+          <input id="claimType" class="form-control" type="text" formControlName="claimType" />
+          @if (form.controls.claimType.touched && form.controls.claimType.invalid) {
+            <div class="validation-error">El tipo de siniestro es obligatorio.</div>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="estimatedAmount">Monto estimado</label>
+          <input
+            id="estimatedAmount"
+            class="form-control"
+            type="number"
+            step="0.01"
+            min="0.01"
+            formControlName="estimatedAmount"
+          />
+          @if (form.controls.estimatedAmount.touched && form.controls.estimatedAmount.invalid) {
+            <div class="validation-error">El monto estimado es obligatorio y debe ser mayor que cero.</div>
+          }
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn" [disabled]="submitting()">
+            {{ isEdit ? 'Guardar cambios' : 'Crear siniestro' }}
+          </button>
+          <a routerLink="/claims" class="btn btn--secondary">Cancelar</a>
+        </div>
+      </form>
+    }
+  </div>
+</div>
