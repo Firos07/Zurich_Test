@@ -4,10 +4,10 @@
     <!-- Fija un único TargetFramework para evitar NETSDK1005: dotnet (MSBuild Core) usa netstandard2.1
          y Visual Studio (MSBuild .NET Framework) usa net472, sobrescribiendo el restore entre sí. -->
     <TargetFramework>netstandard2.1</TargetFramework>
-    <!-- Fuerza el uso de las DLL de DACFx que incluye Microsoft.Build.Sql (170.4.83.3) en lugar de las
-         instaladas por Visual Studio (SQLDB\DAC, 170.4.53.0), que no soportan el parámetro
-         AutomaticIndexCompaction del SqlBuildTask de los targets net472. -->
-    <SqlServerRedistPath>$(NETFrameworkTargetsPath)</SqlServerRedistPath>
+    <!-- En builds con MSBuild .NET Framework (Visual Studio), usa los targets SSDT instalados con VS en lugar
+         de los net472 del paquete: el DACFx instalado por VS 2026 (170.4.53.0) no soporta el parámetro
+         AutomaticIndexCompaction que los targets net472 de Microsoft.Build.Sql 2.2.0 pasan a SqlBuildTask. -->
+    <BuildFromSSDT>true</BuildFromSSDT>
     <DSP>Microsoft.Data.Tools.Schema.Sql.Sql160DatabaseSchemaProvider</DSP>
     <ModelCollation>1033,CI</ModelCollation>
     <TargetDatabase>ClaimsDb</TargetDatabase>
