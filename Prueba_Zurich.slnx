@@ -10,7 +10,7 @@
     <Project Path="tests/Claims.Tests/Claims.Tests.csproj" />
   </Folder>
   <Folder Name="/database/">
-    <Project Path="database/ClaimsDatabase.sqlproj" Type="42ea0dbd-9cf1-443e-919e-be9c484e4577" />
+    <Project Path="database/ClaimsDatabase.sqlproj" Type="42ea0dbd-9cf1-443e-919e-be9c484e4577" Id="25d13d68-8f11-450f-8d13-1a917a8932b9" />
   </Folder>
   <Folder Name="/frontend/">
   </Folder>

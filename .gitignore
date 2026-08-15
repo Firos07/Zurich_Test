@@ -19,6 +19,10 @@ artifacts/
 *.exe
 *.pdb
 
+# ===== SQL Server project artifacts =====
+*.dbmdl
+*.jfm
+
 # ===== Node / Angular =====
 node_modules/
 dist/

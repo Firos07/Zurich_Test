@@ -1,12 +1,17 @@
 <Project Sdk="Microsoft.Build.Sql/2.2.0">
-
-  <PropertyGroup>
+<PropertyGroup>
     <Name>ClaimsDatabase</Name>
+    <!-- Fija un único TargetFramework para evitar NETSDK1005: dotnet (MSBuild Core) usa netstandard2.1
+         y Visual Studio (MSBuild .NET Framework) usa net472, sobrescribiendo el restore entre sí. -->
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <!-- Fuerza el uso de las DLL de DACFx que incluye Microsoft.Build.Sql (170.4.83.3) en lugar de las
+         instaladas por Visual Studio (SQLDB\DAC, 170.4.53.0), que no soportan el parámetro
+         AutomaticIndexCompaction del SqlBuildTask de los targets net472. -->
+    <SqlServerRedistPath>$(NETFrameworkTargetsPath)</SqlServerRedistPath>
     <DSP>Microsoft.Data.Tools.Schema.Sql.Sql160DatabaseSchemaProvider</DSP>
     <ModelCollation>1033,CI</ModelCollation>
     <TargetDatabase>ClaimsDb</TargetDatabase>
   </PropertyGroup>
-
   <ItemGroup>
     <!-- 01_create_database.sql crea la base de datos y no forma parte del modelo -->
     <Build Remove="scripts/01_create_database.sql" />
@@ -15,5 +20,7 @@
     <Build Include="scripts/04_create_indexes.sql" />
     <PostDeploy Include="scripts/05_seed_data.sql" />
   </ItemGroup>
-
+  <ItemGroup>
+    <Folder Include="scripts\" />
+  </ItemGroup>
 </Project>
